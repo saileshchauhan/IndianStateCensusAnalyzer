@@ -57,6 +57,13 @@ namespace TestProject2
             totalRecord = censusAnalyser.LoadCensusData(indianStateCensusFilePath, Country.INDIA, indianStateCensusHeaders);
             Assert.AreEqual(29, totalRecord.Count);           
         }
+        // TC 1.2
+        [Test]
+        public void GivenWrongFilePath_WhenReaded_ShouldReturnCustomException_FILE_NOT_FOUND()
+        {
+            var censusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(wrongIndianStateCensusFilePath, Country.INDIA, indianStateCensusFilePath));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, censusException.eType);  
+        }
 
 
     }
