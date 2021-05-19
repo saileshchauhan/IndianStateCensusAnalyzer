@@ -52,55 +52,60 @@ namespace TestProject2
         }
         // TC 1.1
         [Test]
-        public void GivenIndianCensusDataFile_WhenReaded_ShouldReturnCensusDataCount()
+        public void GivenIndianCensusDataFile_WhenRead_ShouldReturnCensusDataCount()
         {
             totalRecord = censusAnalyser.LoadCensusData(indianStateCensusFilePath, Country.INDIA, indianStateCensusHeaders);
             Assert.AreEqual(29, totalRecord.Count);           
         }
         // TC 1.2
         [Test]
-        public void GivenWrongFilePath_WhenReaded_ShouldReturnCustomException_FILE_NOT_FOUND()
+        public void GivenWrongFilePath_WhenRead_ShouldReturnCustomException_FILE_NOT_FOUND()
         {
             var censusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(wrongIndianStateCensusFilePath, Country.INDIA, indianStateCensusFilePath));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, censusException.eType);  
         }
         // TC 1.3
         [Test]
-        public void GivenWrongFileExtension_WhenReaded_ShouldReturnCustomException_INVALID_FILE_TYPE()
+        public void GivenWrongFileExtension_WhenRead_ShouldReturnCustomException_INVALID_FILE_TYPE()
         {
             var censusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(wrongIndianStateCensusFileType, Country.INDIA, indianStateCensusFilePath));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE, censusException.eType);
         }
         // TC 1.4
         [Test]
-        public void GivenWrongDelimiter_WhenReaded_ShouldReturnCustomException_INCORRECT_DELIMITER()
+        public void GivenWrongDelimiter_WhenRead_ShouldReturnCustomException_INCORRECT_DELIMITER()
         {
             var censusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(delimiterIndianCensusFilePath, Country.INDIA, indianStateCensusHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER, censusException.eType);
         }
         // TC 1.5
         [Test]
-        public void GivenWrongIndianCensusHeaderFile_WhenReaded_ShouldReturnCustomException()
+        public void GivenWrongIndianCensusHeaderFile_WhenRead_ShouldReturnCustomException()
         {
             var censusException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(wrongHeaderIndianCensusFilePath, Country.INDIA, indianStateCensusHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_HEADER, censusException.eType);
         }
         //TC 2.5
         [Test]
-        public void GivenWrongIndianStateFileHeader_WhenReaded_ShouldReturnCusotmException()
+        public void GivenWrongIndianStateFileHeader_WhenRead_ShouldReturnCusotmException()
         {
             var stateException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(wrongHeaderStateCodeFilePath, Country.INDIA, indianStateCodeHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_HEADER, stateException.eType);
         }
         //TC 2.4
         [Test]
-        public void GivenWrongIndianStateDelimiterFile_WhenReaded_ShouldReturnCustomException()
+        public void GivenWrongIndianStateDelimiterFile_WhenRead_ShouldReturnCustomException()
         {
             var stateException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(delimiterIndianStateCodeFilePath, Country.INDIA, indianStateCodeHeaders));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.INCORRECT_DELIMITER, stateException.eType);
         }
-
-
+        //TC 2.3
+        [Test]
+        public void GivenWrongIndianStateCodeFileType_WhenRead_ShouldReturnCustomException_INVALIDFILETYPE()
+        {
+            var stateException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(wrongIndianStateCodeFileType, Country.INDIA, indianStateCodeFilePath));
+            Assert.AreEqual(CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE,stateException.eType);
+        }
     }
 
 }
