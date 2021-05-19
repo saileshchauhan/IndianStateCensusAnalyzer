@@ -113,6 +113,13 @@ namespace TestProject2
             var stateException = Assert.Throws<CensusAnalyserException>(() => censusAnalyser.LoadCensusData(wrongIndianStateCensusFilePath, Country.INDIA, indianStateCodeFilePath));
             Assert.AreEqual(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, stateException.eType);
         }
+        //TC 2.1
+        [Test]
+        public void GivenIndianStateCodeFilePath_WhenRead_ShouldReturnCensusData()
+        {
+            var stateRecord=censusAnalyser.LoadCensusData(indianStateCodeFilePath,Country.INDIA, indianStateCodeHeaders);
+            Assert.AreEqual(37, stateRecord.Count);
+        }
     }
 
 }
